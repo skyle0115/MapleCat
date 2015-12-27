@@ -10,7 +10,6 @@
 #include "font.h"
 #include "audio.h"
 #include "mob.h"
-#define MOB_MAX_COUNT 5
 
 extern Font *large_font;
 extern Mob monster_attr[100];
@@ -20,17 +19,10 @@ int main(){
     large_font = read_font("font.txt");
 
     init();
-    addMob(1, 0);
-    addMob(1, 1);
-    addMob(1, 2);
     addMob(1, 3);
-    addMob(1, 4);
-    addMob(2, 4);
-    addMob(2, 3);
+    addMob(1, 3);
+    addMob(1, 3);
     addMob(2, 2);
-    addMob(2, 1);
-    addMob(2, 0);
-
     int i = 100000, j, k;
     while(i--){
         clearScreen();

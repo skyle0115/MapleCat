@@ -16,7 +16,11 @@
 #define MOB_MAX_COUNT 5
 
 typedef struct{
-    Image *img_l, *img_r;
+    Image *img_stand_l[10], *img_stand_r[10];
+    Image *img_move_l[10], *img_move_r[10];
+    Image *img_hit_l, *img_hit_r;
+    int stand_img_count, move_img_count;
+    int stand_img_speed, move_img_speed;
     int cost;
     int w, h;
     int blood;
@@ -25,12 +29,14 @@ typedef struct{
     int move_speed;
     int atk_speed;
     int money;
-    Image *img;
+    Image *img_stand[10], *img_move[10], *img_hit;
     int move_unit;
     int x, y;
     int wall, floor;
     int hp;
     int harm;
+    int stand_img_index, move_img_index;
+    int stand_img_flag, move_img_flag;
     int move_flag;
     int atk_flag;
     int ver_flag;
@@ -57,6 +63,9 @@ Mob *playerMob(int player, int n);
 int mobState(int player, int n);
 void addMob(int player, int type);
 void updateMobBorder(int player, Mob *monster);
+void movingMob(Mob *monster, int x, int y);
+void attackingMob(Mob *monster, int x, int y);
+void hitMob(Mob *monster, int x, int y);
 void moveMob(int player, int n);
 void attackMob(int player);
 void moveMobLeft(int player, int n);
