@@ -3,6 +3,13 @@
 Font *large_font;
 Mob monster_attr[100];
 Player p[3];
+//
+Image *green_l[7];
+Image *green_r[6];
+int green_dir; //0 = r, 1 = l
+int green_x, green_y,
+    greem_height, green_width,
+    green_flag;
 
 int showMob1_x,
     showMob1_y,
@@ -214,6 +221,30 @@ void init(){
     monster_attr[0].move_speed = 7;
     monster_attr[0].atk_speed = 33;
     monster_attr[0].money = 6;
+
+    //green
+    int green_lIdx;
+    for(green_lIdx = 0; green_lIdx < 7; green_lIdx++){
+        char pixName[256], colorName[256];
+        snprintf(pixName, sizeof pixName, "%s%01d%s", "images\\mob\\green\\green_l_", green_lIdx, ".pixel");
+        snprintf(colorName, sizeof colorName, "%s%01d%s", "images\\mob\\green\\green_l_", green_lIdx, ".color");
+        green_l[green_lIdx] = read_image(pixName, colorName);
+    }
+
+    int green_rIdx;
+    for(green_rIdx = 0; green_rIdx < 6; green_rIdx++){
+        char pixName[256], colorName[256];
+        snprintf(pixName, sizeof pixName, "%s%01d%s", "images\\mob\\green\\green_r_", green_rIdx, ".pixel");
+        snprintf(colorName, sizeof colorName, "%s%01d%s", "images\\mob\\green\\green_r_", green_rIdx, ".color");
+        green_r[green_rIdx] = read_image(pixName, colorName);
+    }
+
+    green_dir = 0;
+    greem_height = 28;
+    green_width = 36;
+    green_x = 0;
+    green_y = 100 - greem_height;
+    green_flag = 0;
 }
 
 void init_mob(Mob *monster, int player, int type){
@@ -493,6 +524,28 @@ void dieMob(int player){
             p[1].border = showMob1_x;
         }else if(player == 2){
             p[2].border = showMob2_x;
+        }
+    }
+}
+
+void green(){
+    if(green_dir==0){
+        green_x += 1;
+        show_image(green_r[green_flag], green_x, green_y);
+        if(green_x % 10 == 0)
+            green_flag = (green_flag + 1)%6;
+        if(green_x >= 360-green_width){
+            green_dir = 1;
+            green_flag = 0;
+        }
+    }else if(green_dir==1){
+        green_x -= 1;
+        show_image(green_l[green_flag], green_x, green_y);
+        if(green_x % 10 == 0)
+            green_flag = (green_flag + 1)%7;
+        if(green_x <= 0){
+            green_dir = 0;
+            green_flag = 0;
         }
     }
 }

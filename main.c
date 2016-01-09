@@ -62,6 +62,9 @@ int main(){
                 }
             }
         }
+
+        //green();
+
         drawCmdWindow();
         Sleep(1);
     }
