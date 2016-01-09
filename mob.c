@@ -4,13 +4,6 @@
 Font *large_font;
 Mob monster_attr[100];
 Player p[3];
-//
-Image *green_l[7];
-Image *green_r[6];
-int green_dir; //0 = r, 1 = l
-int green_x, green_y,
-    greem_height, green_width,
-    green_flag;
 
 int showMob1_x,
     showMob1_y,
@@ -89,17 +82,17 @@ void init(){
     monster_attr[4].move_img_count = 4;
     monster_attr[4].stand_img_speed = 25;
     monster_attr[4].move_img_speed = 25;
-    monster_attr[4].cost = 12;
+    monster_attr[4].cost = 9999;
     monster_attr[4].w = 60;
     monster_attr[4].h = 31;
-    monster_attr[4].blood = 500;
-    monster_attr[4].attack = 35;
-    monster_attr[4].defense = 3;
+    monster_attr[4].blood = 800;
+    monster_attr[4].attack = 200;
+    monster_attr[4].defense = 30;
     monster_attr[4].move_speed = 2;
-    monster_attr[4].atk_speed = 33;
-    monster_attr[4].money = 6;
+    monster_attr[4].atk_speed = 50;
+    monster_attr[4].money = 800;
 
-    //3:mushroom
+    //3:spirit
     monster_attr[3].img_hit_l = read_image("images\\mob\\spirit\\hit1_0_l.pixel", "images\\mob\\spirit\\hit1_0_l.color");
     monster_attr[3].img_hit_r = read_image("images\\mob\\spirit\\hit1_0_r.pixel", "images\\mob\\spirit\\hit1_0_r.color");
     monster_attr[3].img_move_l[0] = read_image("images\\mob\\spirit\\move_0_l.pixel", "images\\mob\\spirit\\move_0_l.color");
@@ -128,15 +121,15 @@ void init(){
     monster_attr[3].move_img_count = 4;
     monster_attr[3].stand_img_speed = 25;
     monster_attr[3].move_img_speed = 25;
-    monster_attr[3].cost = 12;
+    monster_attr[3].cost = 2000;
     monster_attr[3].w = 25;
     monster_attr[3].h = 16;
-    monster_attr[3].blood = 500;
-    monster_attr[3].attack = 35;
-    monster_attr[3].defense = 3;
+    monster_attr[3].blood = 550;
+    monster_attr[3].attack = 150;
+    monster_attr[3].defense = 20;
     monster_attr[3].move_speed = 3;
-    monster_attr[3].atk_speed = 33;
-    monster_attr[3].money = 6;
+    monster_attr[3].atk_speed = 30;
+    monster_attr[3].money = 550;
 
     //2:muhroom
     monster_attr[2].img_hit_l = read_image("images\\mob\\mushroom\\hit1_0_l.pixel", "images\\mob\\mushroom\\hit1_0_l.color");
@@ -157,15 +150,15 @@ void init(){
     monster_attr[2].move_img_count = 4;
     monster_attr[2].stand_img_speed = 20;
     monster_attr[2].move_img_speed = 20;
-    monster_attr[2].cost = 12;
+    monster_attr[2].cost = 1500;
     monster_attr[2].w = 30;
     monster_attr[2].h = 15;
-    monster_attr[2].blood = 500;
-    monster_attr[2].attack = 35;
-    monster_attr[2].defense = 3;
+    monster_attr[2].blood = 350;
+    monster_attr[2].attack = 75;
+    monster_attr[2].defense = 15;
     monster_attr[2].move_speed = 6;
-    monster_attr[2].atk_speed = 33;
-    monster_attr[2].money = 6;
+    monster_attr[2].atk_speed = 35;
+    monster_attr[2].money = 350;
 
     //1:pig
     monster_attr[1].img_hit_l = read_image("images\\mob\\pig\\hit1_0_l.pixel", "images\\mob\\pig\\hit1_0_l.color");
@@ -186,15 +179,15 @@ void init(){
     monster_attr[1].move_img_count = 3;
     monster_attr[1].stand_img_speed = 15;
     monster_attr[1].move_img_speed = 15;
-    monster_attr[1].cost = 12;
+    monster_attr[1].cost = 800;
     monster_attr[1].w = 35;
     monster_attr[1].h = 15;
-    monster_attr[1].blood = 777;
-    monster_attr[1].attack = 77;
-    monster_attr[1].defense = 3;
+    monster_attr[1].blood = 200;
+    monster_attr[1].attack = 50;
+    monster_attr[1].defense = 10;
     monster_attr[1].move_speed = 5;
-    monster_attr[1].atk_speed = 28;
-    monster_attr[1].money = 6;
+    monster_attr[1].atk_speed = 30;
+    monster_attr[1].money = 200;
 
     //0:snail
     monster_attr[0].img_hit_l = read_image("images\\mob\\snail\\hit1_0_l.pixel", "images\\mob\\snail\\hit1_0_l.color"),
@@ -213,39 +206,15 @@ void init(){
     monster_attr[0].move_img_count = 4;
     monster_attr[0].stand_img_speed = 30;
     monster_attr[0].move_img_speed = 30;
-    monster_attr[0].cost = 12;
+    monster_attr[0].cost = 400;
     monster_attr[0].w = 25;
     monster_attr[0].h = 14;
-    monster_attr[0].blood = 500;
-    monster_attr[0].attack = 35;
-    monster_attr[0].defense = 3;
+    monster_attr[0].blood = 100;
+    monster_attr[0].attack = 10;
+    monster_attr[0].defense = 5;
     monster_attr[0].move_speed = 7;
-    monster_attr[0].atk_speed = 33;
-    monster_attr[0].money = 6;
-
-    //green
-    int green_lIdx;
-    for(green_lIdx = 0; green_lIdx < 7; green_lIdx++){
-        char pixName[256], colorName[256];
-        snprintf(pixName, sizeof pixName, "%s%01d%s", "images\\mob\\green\\green_l_", green_lIdx, ".pixel");
-        snprintf(colorName, sizeof colorName, "%s%01d%s", "images\\mob\\green\\green_l_", green_lIdx, ".color");
-        green_l[green_lIdx] = read_image(pixName, colorName);
-    }
-
-    int green_rIdx;
-    for(green_rIdx = 0; green_rIdx < 6; green_rIdx++){
-        char pixName[256], colorName[256];
-        snprintf(pixName, sizeof pixName, "%s%01d%s", "images\\mob\\green\\green_r_", green_rIdx, ".pixel");
-        snprintf(colorName, sizeof colorName, "%s%01d%s", "images\\mob\\green\\green_r_", green_rIdx, ".color");
-        green_r[green_rIdx] = read_image(pixName, colorName);
-    }
-
-    green_dir = 0;
-    greem_height = 28;
-    green_width = 36;
-    green_x = 0;
-    green_y = 100 - greem_height;
-    green_flag = 0;
+    monster_attr[0].atk_speed = 40;
+    monster_attr[0].money = 100;
 }
 
 void init_mob(Mob *monster, int player, int type){
@@ -260,7 +229,7 @@ void init_mob(Mob *monster, int player, int type){
     monster->attack = monster_attr[type].attack;
     monster->defense = monster_attr[type].defense;
     monster->move_speed = monster_attr[type].move_speed;
-    monster->atk_speed = monster_attr[type].atk_speed + offset(2);
+    monster->atk_speed = monster_attr[type].atk_speed;// + offset(2);
     monster->money = monster_attr[type].money;
     if (player==1){
         memcpy(monster->img_stand, monster_attr[type].img_stand_l, sizeof(monster_attr[type].img_stand_l));
@@ -413,6 +382,7 @@ void attackMob(int player){
 
 void loseHp(Mob *monster, int value){
     Hitvoice();
+    if(value <= 0) value = 1;
     monster->harm = value; //randHarm(monster->attack) - enemy->defense;
     monster->hp = monster->hp - monster->harm;
 }
@@ -529,6 +499,48 @@ void dieMob(int player){
             p[2].border = showMob2_x;
         }
     }
+}
+
+void ult(int player, int harm){
+    int i;
+    for(i = 0; i < p[3-player].count; i++){
+        if(playerMob(3-player, i)->hp - harm > 0)
+            playerMob(3-player, i)->hp -= harm;
+        else
+            playerMob(3-player, i)->hp = 1;
+    }
+}
+
+Image *green_l[7],
+      *green_r[6];
+int green_dir,
+    green_x, green_y,
+    greem_height, green_width,
+    green_flag;
+
+void init_green(){
+    int green_lIdx;
+    for(green_lIdx = 0; green_lIdx < 7; green_lIdx++){
+        char pixName[256], colorName[256];
+        snprintf(pixName, sizeof pixName, "%s%01d%s", "images\\mob\\green\\green_l_", green_lIdx, ".pixel");
+        snprintf(colorName, sizeof colorName, "%s%01d%s", "images\\mob\\green\\green_l_", green_lIdx, ".color");
+        green_l[green_lIdx] = read_image(pixName, colorName);
+    }
+
+    int green_rIdx;
+    for(green_rIdx = 0; green_rIdx < 6; green_rIdx++){
+        char pixName[256], colorName[256];
+        snprintf(pixName, sizeof pixName, "%s%01d%s", "images\\mob\\green\\green_r_", green_rIdx, ".pixel");
+        snprintf(colorName, sizeof colorName, "%s%01d%s", "images\\mob\\green\\green_r_", green_rIdx, ".color");
+        green_r[green_rIdx] = read_image(pixName, colorName);
+    }
+
+    green_dir = 0;
+    greem_height = 28;
+    green_width = 36;
+    green_x = 0;
+    green_y = 100 - greem_height;
+    green_flag = 0;
 }
 
 void green(){

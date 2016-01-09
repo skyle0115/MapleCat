@@ -19,21 +19,25 @@ int main(){
     large_font = read_font("font.txt");
 
     init();
-    p[1].money = 10000;
-    p[2].money = 10000;
+    p[1].money = 100000;
+    p[2].money = 100000;
+    addMob(1, 0);
     addMob(1, 1);
     addMob(1, 2);
+    addMob(1, 3);
     addMob(1, 4);
+    addMob(2, 4);
     addMob(2, 3);
     addMob(2, 2);
-    addMob(2, 4);
+    addMob(2, 1);
+    addMob(2, 0);
 
     int i = 100000, j, k;
     while(i--){
         clearScreen();
 
-        test(int2string(p[1].money), 0);
-        test(int2string(p[2].money), 1);
+        test(int2string(playerMob(1, 0)->hp), 0);
+        test(int2string(playerMob(1, 1)->hp), 1);
 
         for(j = 1; j <= 2; j++){
             for(k = p[j].count - 1; k >= 0; k--){

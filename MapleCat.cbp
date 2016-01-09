@@ -34,7 +34,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="MapleCat.layout" />
+		<Unit filename="Hit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Hit.h" />
 		<Unit filename="audio.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -47,7 +50,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="font.h" />
-		<Unit filename="font.txt" />
 		<Unit filename="image.c">
 			<Option compilerVar="CC" />
 		</Unit>
