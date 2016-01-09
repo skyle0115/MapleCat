@@ -1,4 +1,5 @@
 #include "mob.h"
+#include "hit.h"
 
 Font *large_font;
 Mob monster_attr[100];
@@ -411,6 +412,7 @@ void attackMob(int player){
 }
 
 void loseHp(Mob *monster, int value){
+    Hitvoice();
     monster->harm = value; //randHarm(monster->attack) - enemy->defense;
     monster->hp = monster->hp - monster->harm;
 }
@@ -513,6 +515,7 @@ void moveMobDown(int player, int n){
 
 void dieMob(int player){
     //destroy_image(&p[player].monster[p[player].front].img);
+    Dievoice();
     p[player].count--;
     p[3 - player].money += playerMob(player, 0)->money;
     if(p[player].count >= 1){

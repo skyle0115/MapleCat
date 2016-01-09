@@ -74,6 +74,7 @@ void showHarm(Mob *monster);
 void moveMobUp(int player, int n);
 void moveMobDown(int player, int n);
 void dieMob(int player);
+void green();
 void test(char *c, int n);
 
 #endif
