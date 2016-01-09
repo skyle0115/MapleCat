@@ -269,6 +269,11 @@ int mobState(int player, int n){
 
 void addMob(int player, int type){
     if (p[player].count < MOB_MAX_COUNT){
+        if(p[player].money >= monster_attr[type].cost){
+            p[player].money -= monster_attr[type].cost;
+        }else{
+            return;
+        }
         if(p[player].count == 0) p[player].front = 0;
         Mob *monster = playerMob(player, p[player].count);
         init_mob(monster, player, type);
@@ -478,6 +483,7 @@ void moveMobDown(int player, int n){
 void dieMob(int player){
     //destroy_image(&p[player].monster[p[player].front].img);
     p[player].count--;
+    p[3 - player].money += playerMob(player, 0)->money;
     if(p[player].count >= 1){
         Mob *monster = playerMob(player, 1);
         p[player].front++;

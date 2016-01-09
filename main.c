@@ -19,16 +19,21 @@ int main(){
     large_font = read_font("font.txt");
 
     init();
-    addMob(1, 3);
-    addMob(1, 3);
-    addMob(1, 3);
+    p[1].money = 10000;
+    p[2].money = 10000;
+    addMob(1, 1);
+    addMob(1, 2);
+    addMob(1, 4);
+    addMob(2, 3);
     addMob(2, 2);
+    addMob(2, 4);
+
     int i = 100000, j, k;
     while(i--){
         clearScreen();
 
-        test(int2string(p[1].blood), 0);
-        test(int2string(p[2].blood), 1);
+        test(int2string(p[1].money), 0);
+        test(int2string(p[2].money), 1);
 
         for(j = 1; j <= 2; j++){
             for(k = p[j].count - 1; k >= 0; k--){
@@ -58,7 +63,7 @@ int main(){
             }
         }
         drawCmdWindow();
-        Sleep(5);
+        Sleep(1);
     }
     return 0;
 }
