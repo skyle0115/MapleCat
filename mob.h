@@ -47,6 +47,7 @@ typedef struct{
 typedef struct{
     int money;
     int blood;
+    int score;
     Mob monster[MOB_MAX_COUNT];
     int front;
     int count;
@@ -59,10 +60,14 @@ int randHarm(int harm);
 int offset(int v);
 void init();
 void init_mob(Mob *monster, int player, int type);
+int playerScore(int player);
 Mob *playerMob(int player, int n);
 int mobState(int player, int n);
 void addMob(int player, int type);
 void updateMobBorder(int player, Mob *monster);
+void movingMobImg(Mob *monster, int x, int y);
+void attackingMobImg(Mob *monster, int x, int y);
+void hitMobImg(Mob *monster, int x, int y);
 void movingMob(Mob *monster, int x, int y);
 void attackingMob(Mob *monster, int x, int y);
 void hitMob(Mob *monster, int x, int y);

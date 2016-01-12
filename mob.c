@@ -40,11 +40,13 @@ void init(){
 
     //player 1, 2
     p[1].money = 0;
+    p[1].score = 0;
     p[1].blood = 1000;
     p[1].count = 0;
     p[1].border = showMob1_x;
 
     p[2].money = 0;
+    p[2].score = 0;
     p[2].blood = 1000;
     p[2].count = 0;
     p[2].border = showMob2_x;
@@ -260,6 +262,10 @@ void init_mob(Mob *monster, int player, int type){
     monster->state = 1;
 }
 
+int playerScore(int player){
+    return p[player].score + p[player].blood * 1.61803;
+}
+
 Mob *playerMob(int player, int n){
     return &p[player].monster[(n+p[player].front+MOB_MAX_COUNT)%MOB_MAX_COUNT];
 }
@@ -272,6 +278,7 @@ void addMob(int player, int type){
     if (p[player].count < MOB_MAX_COUNT){
         if(p[player].money >= monster_attr[type].cost){
             p[player].money -= monster_attr[type].cost;
+            p[player].score += monster_attr[type].cost * 3.14159;
         }else{
             return;
         }
@@ -380,11 +387,15 @@ void attackMob(int player){
     monster->atk_flag = (monster->atk_flag + 1) % monster->atk_speed;
 }
 
-void loseHp(Mob *monster, int value){
+void loseHp(int player, int value){
     Hitvoice();
+
+    Mob *monster = playerMob(player, 0);
     if(value <= 0) value = 1;
     monster->harm = value; //randHarm(monster->attack) - enemy->defense;
     monster->hp = monster->hp - monster->harm;
+
+    p[3-player].score += monster->harm*2.71828;
 }
 
 void moveMobLeft(int player, int n){
@@ -402,7 +413,7 @@ void moveMobLeft(int player, int n){
             monster->state = 2;
 
             if(p[3-player].count != 0){
-                loseHp(enemy, randHarm(monster->attack) - enemy->defense);
+                loseHp(3-player, randHarm(monster->attack) - enemy->defense);
                 if(enemy->hp <= 0){
                     enemy->state = 7;
                 }else{
@@ -427,7 +438,7 @@ void moveMobRight(int player, int n){
             monster->state = 2;
 
             if(p[3-player].count != 0){
-                loseHp(enemy, randHarm(monster->attack) - enemy->defense);
+                loseHp(3-player, randHarm(monster->attack) - enemy->defense);
                 if(enemy->hp <= 0){
                     enemy->state = 7;
                 }else{
